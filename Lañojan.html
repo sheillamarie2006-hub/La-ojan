@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 My Clean Portfolio 💖</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>*
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fce4ec; 
+            color: #4a148c; 
+            transition: background-color 0.5s, color 0.5s; 
+        }
+
+        header {
+            background-color: #7b1fa2;
+            color: white;
+            padding: 40px 20px 20px 20px; 
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            transition: background-color 0.5s;
+        }
+    
+        .header-nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; 
+            gap: 10px;
+        }
+
+        .header-nav a {
+            text-decoration: none;
+            color: white;
+            background-color: #e91e63; 
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+            box-shadow: 0 3px #c2185b;
+        }
+        
+        .header-nav a:hover {
+            background-color: #c2185b;
+            box-shadow: 0 2px #a31545;
+            transform: translateY(1px);
+        }
+        
+        .header-nav a:active {
+            transform: translateY(3px);
+            box-shadow: 0 0 #c2185b;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 3em;
+            color: #ffccff;
+            margin: 0 0 5px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #4a148c;
+            border-bottom: 3px dashed #ce93d8;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+            transition: color 0.5s, border-color 0.5s;
+        }
+        
+        header h2 {
+            color: #fff;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ce93d8;
+            transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s;
+            scroll-margin-top: 80px; 
+        }
+        
+        p {
+            line-height: 1.7;
+            text-align: justify;
+            font-weight: 400;
+        }
+        
+        .skills-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .skills-column {
+            width: 45%; 
+            padding: 15px;
+            background-color: #f3e5f5; 
+            border-radius: 15px;
+            border: 1px solid #ce93d8;
+            transition: background-color 0.5s;
+        }
+
+        .skills-column h3 {
+            color: #7b1fa2;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 1.4em;
+            transition: color 0.5s;
+        }
+
+        .skills-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skills-column li {
+            background-color: #fff; 
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            font-size: 1em;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.5s, box-shadow 0.3s;
+        }
+        
+        .skills-column li:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        #modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            cursor: pointer; /* Indicates it can be closed */
+        }
+        
+        /* NOTE: The default .gallery and .gallery-item rules below apply to the videos and achievements sections,
+           but the new looping gallery below has its own, more specific styles that override these for the #photos section.
+        */
+        .gallery-item img {
+            cursor: zoom-in; /* Indicate that the image can be clicked to zoom */
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.5s; /* Add transform transition */
+        }
+
+        .gallery-item img.zoomed {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: auto;
+            max-width: 90vw;
+            max-height: 90vh;
+            height: auto;
+            border-radius: 15px;
+            object-fit: contain;
+            z-index: 1001; /* Above the overlay */
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            cursor: zoom-out; /* Indicate it can be un-zoomed */
+        }
+        
+        /* --- Looping Gallery Animation Styles (NEW) --- */
+        .gallery-container {
+            overflow: hidden; /* Hide content outside the container */
+            margin: 20px 0;
+            padding: 10px 0;
+            background-color: #f3e5f5;
+            border-radius: 15px;
+            border: 2px solid #ce93d8;
+        }
+
+        .gallery-wrap {
+            display: flex;
+            width: fit-content; /* Allow the wrap to hold all items and duplicates */
+            animation: scroll-left 30s linear infinite; /* Apply the animation */
+        }
+        
+        .gallery-item-loop {
+            width: 300px; /* Fixed width for each item in the loop */
+            flex-shrink: 0; /* Prevents items from shrinking */
+            margin: 0 10px; 
+            text-align: center;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.5s;
+        }
+
+        .gallery-item-loop img {
+            width: 280px; 
+            height: 180px;
+            border-radius: 10px;
+            border: 3px solid #ba68c8;
+            object-fit: cover;
+            transition: border-color 0.5s;
+            cursor: zoom-in;
+        }
+
+        .gallery-item-loop p {
+            font-size: 0.9em;
+            margin-top: 10px;
+            color: #6a1b9a;
+            text-align: center;
+            transition: color 0.5s;
+        }
+        
+        /* Stop the animation on hover for better viewing */
+        .gallery-container:hover .gallery-wrap {
+            animation-play-state: paused;
+        }
+
+        /* The core looping animation: moves the content left by 50% (the width of one full set of images) */
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } 
+        }
+
+        /* --- Dark Mode Styles (Updated for Loop) --- */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0f7fa;
+        }
+        
+        body.dark-mode header {
+            background-color: #004d40;
+        }
+        
+        body.dark-mode .header-nav a {
+            background-color: #00897b;
+            box-shadow: 0 3px #004d40;
+        }
+        
+        body.dark-mode .header-nav a:hover {
+            background-color: #00695c;
+            box-shadow: 0 2px #004d40;
+        }
+        
+        body.dark-mode .header-nav a:active {
+            box-shadow: 0 0 #004d40;
+        }
+        
+        body.dark-mode h2 {
+            color: #80cbc4;
+            border-bottom: 3px dashed #00897b;
+        }
+
+        body.dark-mode section {
+            background-color: #1e1e1e;
+            border: 2px solid #004d40;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+        
+    
+        body.dark-mode .skills-column {
+            background-color: #2c2c2c;
+            border: 1px solid #00897b;
+        }
+        
+        body.dark-mode .skills-column h3 {
+            color: #80cbc4;
+        }
+
+        body.dark-mode .skills-column li {
+            background-color: #383838;
+            color: #e0f7fa;
+        }
+    
+    
+        body.dark-mode .gallery-container {
+            background-color: #2c2c2c;
+            border: 2px solid #00897b;
+        }
+        
+        body.dark-mode .gallery-item-loop {
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        
+        body.dark-mode .gallery-item-loop img {
+            border: 3px solid #00897b;
+        }
+        
+        body.dark-mode .gallery-item-loop p {
+            color: #e0f7fa;
+        }
+
+    
+        body.dark-mode .gallery-item {
+            background-color: #2c2c2c;
+        }
+        
+        body.dark-mode .gallery-item img, 
+        body.dark-mode .gallery-item iframe {
+            border: 3px solid #00897b;
+        }
+        
+        body.dark-mode .gallery-item p {
+            color: #e0f7fa;
+        }
+        
+        body.dark-mode .outputs a {
+            color: #ffab40;
+        }
+        
+        body.dark-mode .contact-form {
+            background-color: #2c2c2c;
+            border: 5px solid #004d40;
+        }
+
+        body.dark-mode .contact-form label {
+            color: #80cbc4;
+        }
+
+        body.dark-mode .contact-form input[type="text"],
+        body.dark-mode .contact-form input[type="email"],
+        body.dark-mode .contact-form textarea {
+            background-color: #121212;
+            color: #e0f7fa;
+            border: 2px solid #004d40;
+        }
+        
+        body.dark-mode footer {
+            background-color: #004d40;
+        }
+        
+        
+        #mode-toggle {
+            background-color: #7b1fa2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px auto;
+            display: block;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        
+        #mode-toggle:hover {
+            background-color: #993399;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .gallery-item {
+            width: 30%;
+            margin: 15px 0;
+            text-align: center;
+            background-color: #f3e5f5;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.5s;
+        }
+
+        .gallery-item img, .gallery-item iframe {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            border: 3px solid #ba68c8;
+            object-fit: cover;
+            transition: border-color 0.5s;
+        }
+
+        .gallery-item p {
+            font-size: 0.9em;
+            margin-top: 10px;
+            color: #6a1b9a;
+            text-align: center;
+            transition: color 0.5s;
+        }
+
+        .outputs ul {
+            list-style: '⭐ ';
+            padding-left: 25px;
+        }
+        
+        .outputs li {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .outputs a {
+            color: #e91e63;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.5s;
+        }
+
+        .outputs a:hover {
+            color: #ff80ab;
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 30px;
+            border: 5px solid #ce93d8;
+            border-radius: 25px;
+            text-align: left; 
+            background-color: #f3e5f5;
+            transition: background-color 0.5s, border-color 0.5s;
+        }
+
+        .contact-form label {
+            display: block;
+            width: 100%;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #7b1fa2;
+            transition: color 0.5s;
+        }
+        
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            display: block;
+            width: 95%;
+            margin-bottom: 20px;
+            padding: 12px;
+            border: 2px solid #ce93d8;
+            border-radius: 10px;
+            background-color: white;
+            transition: border-color 0.3s, background-color 0.5s, color 0.5s;
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: #e91e63;
+            outline: none;
+        }
+
+        .contact-form button {
+            background-color: #ff80ab;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 4px #e91e63;
+            font-weight: 600;
+        }
+
+        .contact-form button:hover {
+            background-color: #e91e63;
+        }
+        
+        .contact-form button:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 #e91e63;
+        }
+        
+        footer {
+            background-color: #4a148c;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-weight: 300;
+            transition: background-color 0.5s;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="modal-overlay"></div>
+
+    <header>
+        <h1>My Portfolio</h1>
+        <h2>Sheilla Marie Lañojan</h2>
+        <p>Bachelor of Science in Information Technology</p>
+        
+        <nav class="header-nav">
+            <a href="#about">About Me 👋</a>
+            <a href="#photos">Photos 📸</a>
+            <a href="#videos">Videos 🎥</a>
+            <a href="#skills">Skills 🧠🎨</a>
+            <a href="#achievements">Achievements 🏅</a>
+            <a href="#contact">Contact Me 💌</a>
+        </nav>
+        </header>
+
+    <main>
+        <button id="mode-toggle">Switch to Dark Mode 🌙</button>
+
+        <section id="about">
+            <h2>Hello, I'm Sheilla Marie! </h2>
+            <p>
+              I am Sheilla Marie Lañojan, a **BSIT student** at Central Philippine State University. For fun, I enjoy **Drawing**, **Dancing**, and **Playing online games**! I also often use **Capcut** for video editing.
+            </p>
+        </section>
+
+        <section id="photos">
+            <h2>My Favorite Photos📸</h2>
+            
+            <div class="gallery-container">
+                <div class="gallery-wrap">
+                    
+                    <div class="gallery-item-loop">
+                        <img src="IMG20250929142316 (1).jpg" alt="A lovely swimming spot" onclick="zoomImage(this)">
+                        <p>This is me when we go in division near Poblacion Highschool</p>
+                    </div>
+                    
+                    <div class="gallery-item-loop">
+                        <img src="received_1677601796241809 (1).jpeg" alt="Me in Baji Baji" onclick="zoomImage(this)">
+                        <p>This me when we went to The new lane in Bungyod</p>
+                    </div>
+                    
+                    <div class="gallery-item-loop">
+                        <img src="received_1102198738570024 (1).jpeg" alt="A self-portrait" onclick="zoomImage(this)">
+                        <p>This is also taken in new lanes in bungyod</p>
+                    </div>
+                    
+                    <div class="gallery-item-loop">
+                        <img src="Messenger_creation_DE3769C4-299D-4F55-A15F-C63BB44C3979~2.jpeg" alt="A lovely swimming spot" onclick="zoomImage(this)">
+                        <p>This is my favorite place to swim! (Click to zoom!)</p>
+                    </div>
+                    
+                    <div class="gallery-item-loop">
+                        <img src="20250415_143106~2.jpg" alt="Me in Baji Baji" onclick="zoomImage(this)">
+                        <p>This is me when we were in Baji Baji! (Click to zoom!)</p>
+                    </div>
+                    
+                    <div class="gallery-item-loop">
+                        <img src="Messenger_creation_DE3769C4-299D-4F55-A15F-C63BB44C3979~2.jpeg" alt="A self-portrait" onclick="zoomImage(this)">
+                        <p>This is Me! (Click to zoom!)</p>
+                    </div>
+                    
+                </div>
+            </div>
+            </section>
+  <section id="videos">
+    <h2>Cool Videos I've Taken                (Videos) 🎥</h2>
+    <div class="gallery">
+        
+    <section id="videos">
+    <h2>Cool Videos I've Taken                (Videos) 🎥</h2>
+    <div class="gallery">
+        
+        <div class="gallery-item">
+            <iframe 
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/M2WTUoy4y6E?rel=0&modestbranding=1" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
+            <p>Short video clip 1</p>
+      
+        </div>
+
+    </div>
+</section>
+
+
+
+        <section id="skills">
+            <h2>Hobbies &  Skills 🧠🎨</h2>
+            <div class="skills-grid">
+                
+                <div class="skills-column">
+                    <h3>Hobbies & Interests 💖</h3>
+                    <ul>
+                        <li>Drawing ✏️</li>
+                        <li>Dancing 💃</li>
+                        <li>Playing Online Games 🎮</li>
+                        <li>Eating</li>
+                    </ul>
+                </div>
+                
+                <div class="skills-column">
+                    <h3> Skills 💻</h3>
+                    <ul>
+                        <li>Figma Design 🎨</li>
+                        <li>Canva Design 🖌️</li>
+                        <li>Capcut Editing</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </section>
+        
+        
+        <section class="outputs">
+            <h2>My Digital Creations ✨</h2>
+            <ul>
+                <li>Portfolio in Canva: <a href="https://www.canva.com/design/DAGxQ-OLtNo/_O8d-X4iZ_AMIC7DgoWOMg/edit?utm_content=DAGxQ-OLtNo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">CLICK HERE to see my Canva portfolio</a></li>
+                <li>Portfolio in Figma: <a href="https://www.figma.com/proto/DUxN42QVhSXNdQWt8EAoOn/FIGMA-PORTFOLIO?node-id=0-1&t=SHRKe2h5PlyBr3ZE-1" target="_blank">CLICK HERE to see my Figma portfolio</a></li>
+                <li>Figma E-Commerce Prototype: <a href="https://www.figma.com/proto/WfZlzdzetxQP0WsN78BS3M/Lanojan--Sheilla-Marie-T.?node-id=0-1&t=l8PRIjqbVR8UHVEQ-1" target="_blank">CLICK HERE to see my E-Commerce design</a></li>
+            </ul>
+        </section>
+           <section id="achievements">
+            <h2>My Achievements & Experience 🏆</h2>
+            <p>
+                "I actively participated in our school's Mobile Legends
+esports event , where my team demonstrated strong
+coordination and strategic gameplay. We got
+Champion twice . After several intense matches, we
+emerged as champions, making it one of the most
+memorable achievements of my school life."
+            </p>
+            <div class="gallery">
+                
+                <div class="gallery-item">
+                    <img src="received_1046205251015479_image_repair_1754218601419.jpg" alt="Certificate of Participation" onclick="zoomImage(this)">
+                    <p>We took this photo when we have our second win.</p>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="received_4045798345750174.jpeg" alt="Group Photo" onclick="zoomImage(this)">
+                    <p>This is the second award that I achieve .</p>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="20250801_170402.jpg" alt="Award or Recognition" onclick="zoomImage(this)">
+                    <p>This Is the First award that we achieve by being a champion in MLBB </p>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="FB_IMG_1754463334760 (1) (1).jpg" alt="Award or Recognition" onclick="zoomImage(this)">
+                    <p>This is the first win in participating in MLBB in our school during in my First Year.</p>
+                </div>
+
+            </div>
+        </section>     
+        <section id="contact">
+            <h2>Send Me a Sweet Message! 💌</h2>
+            <form action="/submit-form" method="post" class="contact-form">
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname" required>
+                
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" placeholder="Enter your sweet message here..." required></textarea>
+                
+                <button type="submit">Send It! 💖</button>
+            </form>  
+        </section>
+         <center>
+        <h1>Contact Me</h1>
+
+    <div class="contact-links">
+       
+        <a href="https://www.instagram.com/shei_luvx?igsh=ZjA0YjN6N2lubGt5" target="_blank">Instagram</a>
+
+        <a href="https://www.facebook.com/sheiluvMe" target="_blank">Facebook</a>
+
+        <a href="sheillamarie2006@gmail.com">Email</a>
+        </center>
+    </div>
+        
+    </main>
+ 
+    <footer> <center>
+        <p>&copy; 2025 Sheilla's Portfolio.</p>
+   </center>  </footer>
+ 
+    <script>
+    
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('mode-toggle');
+            const body = document.body;
+            
+            
+            function setDarkMode(isDark) {
+                if (isDark) {
+                    body.classList.add('dark-mode');
+                    toggleButton.textContent = 'Switch to Light Mode ☀️';
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    body.classList.remove('dark-mode');
+                    toggleButton.textContent = 'Switch to Dark Mode 🌙';
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            }
+
+            
+            const savedMode = localStorage.getItem('darkMode');
+            if (savedMode === 'enabled') {
+                setDarkMode(true);
+            } else {
+                setDarkMode(false);
+            }
+
+            
+            toggleButton.addEventListener('click', () => {
+                const isDark = body.classList.contains('dark-mode');
+                setDarkMode(!isDark);
+            });
+        });
+
+        
+    </script>
+</body>
+</html>
