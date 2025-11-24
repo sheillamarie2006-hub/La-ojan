@@ -3,414 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💖 My Portfolio 💖</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap'); /* For the code block */
+
+        :root {
+            --primary-bg: #1a1226; 
+            --secondary-bg: #2d1e3d;
+            --accent-color: #f72585;
+            --secondary-accent: #7209b7; 
+            --text-color: #f3e9f4;
+            --light-text: #c7b3d3;
+
+
+            --code-bg: #0d0913;
+            --code-keyword: #5d83f8; 
+            --code-string: #f72585; 
+            --code-comment: #7e879c;
+            --code-property: #48cfad;
+            --code-function: #ffb86c;
+            }
+
         body {
             font-family: 'Poppins', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
             margin: 0;
-            padding: 0;
-            background-color: #fce4ec; 
-            color: #4a148c; 
-            transition: background-color 0.5s, color 0.5s; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        header {
-            background-color: #7b1fa2;
-            color: white;
-            padding: 40px 20px 20px 20px; 
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            transition: background-color 0.5s;
+       
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5rem;
+            background-color: var(--primary-bg);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* --- NEW PROFILE PICTURE STYLES --- */
-        .profile-pic-container {
-            margin: 10px auto 20px auto;
-            width: 150px; 
-            height: 150px; 
-            border-radius: 50%; /* Makes it circular */
-            overflow: hidden; /* Hides parts of the image outside the circle */
-            border: 5px solid #ffab40; /* Vibrant border */
-            box-shadow: 0 0 15px rgba(255, 171, 64, 0.8), 0 0 5px rgba(0, 0, 0, 0.3); /* Glow effect and subtle shadow */
-            transition: border-color 0.5s;
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
         }
 
-        .profile-pic-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures the image covers the area without distortion */
-            display: block;
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
         }
-        /* ---------------------------------- */
-    
-        .header-nav {
-            margin-top: 20px;
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+        }
+        
+        
+        .section-padding {
+            padding: 80px 5rem;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--secondary-accent);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+
+        .hero-section {
+            height: 100vh;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap; 
-            gap: 10px;
+            align-items: center;
+            padding: 2rem 5rem;
+            position: relative;
+            overflow: hidden;
+            gap: 5rem;
+        }
+        .hero-content { flex: 1; max-width: 600px; }
+        .hero-content h3 { font-size: 1.5rem; font-weight: 400; color: var(--light-text); margin-bottom: 0.5rem; }
+        .hero-content h1 { font-size: 3.8rem; font-weight: 700; margin-top: 0; margin-bottom: 0.5rem; line-height: 1.1; }
+        .hero-content h1 span { color: var(--accent-color); }
+        .hero-content p { font-size: 1.2rem; color: var(--light-text); line-height: 1.6; margin-bottom: 2rem; }
+        .social-icons { display: flex; gap: 1.5rem; margin-bottom: 2rem; }
+        .social-icons a { 
+            display: flex; justify-content: center; align-items: center; width: 45px; height: 45px; 
+            background-color: var(--secondary-bg); border-radius: 50%; color: var(--accent-color); 
+            font-size: 1.4rem; text-decoration: none; transition: transform 0.3s ease, background-color 0.3s ease; 
+        }
+        .social-icons a:hover { transform: translateY(-5px); background-color: var(--accent-color); color: var(--primary-bg); }
+        .btn-primary { 
+            display: inline-block; background: linear-gradient(90deg, var(--secondary-accent), var(--accent-color)); 
+            color: var(--text-color); padding: 1rem 2.5rem; border-radius: 30px; text-decoration: none; 
+            font-weight: 600; font-size: 1.1rem; transition: background 0.3s ease, transform 0.3s ease; 
+            box-shadow: 0 8px 20px rgba(247, 37, 133, 0.3); border: none; 
+        }
+        .btn-primary:hover { background: linear-gradient(90deg, #590d93, #d82075); transform: translateY(-3px); }
+        .hero-image { position: relative; width: 350px; height: 350px; display: flex; justify-content: center; align-items: center; }
+        .hero-image img { 
+            width: 100%; height: 100%; border-radius: 50%; object-fit: cover; position: relative; z-index: 2; 
+            box-shadow: 0 0 20px rgba(247, 37, 133, 0.4); 
+        }
+        .hero-image::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-accent), var(--accent-color));
+            background-size: 200% 200%; animation: glowing 8s ease-in-out infinite alternate; filter: blur(30px);
+            opacity: 0.6; z-index: 1;
         }
 
-        .header-nav a {
-            text-decoration: none;
-            color: white;
-            background-color: #e91e63; 
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-weight: 600;
-            font-size: 0.95em;
-            transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
-            box-shadow: 0 3px #c2185b;
+        .about-section {
+            background-color: var(--secondary-bg);
+            
+            min-height: auto; 
         }
         
-        .header-nav a:hover {
-            background-color: #c2185b;
-            box-shadow: 0 2px #a31545;
-            transform: translateY(1px);
-        }
-        
-        .header-nav a:active {
-            transform: translateY(3px);
-            box-shadow: 0 0 #c2185b;
-        }
-
-        h1 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 3em;
-            color: #ffccff;
-            margin: 0 0 5px 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        h2 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            color: #4a148c;
-            border-bottom: 3px dashed #ce93d8;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-            text-align: center;
-            transition: color 0.5s, border-color 0.5s;
-        }
-        
-        header h2 {
-            color: #fff;
-        }
-
-        main {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-        }
-
-        section {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 20px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            border: 2px solid #ce93d8;
-            transition: background-color 0.5s, border-color 0.5s, box-shadow 0.5s;
-            scroll-margin-top: 80px; 
-        }
-        
-        p {
-            line-height: 1.7;
-            text-align: justify;
-            font-weight: 400;
-        }
-        
-        .skills-grid {
+       
+        .about-main-flex {
             display: flex;
-            justify-content: space-around;
-            gap: 20px;
+            gap: 4rem;
+            width: 100%;
+            align-items: flex-start; 
+        }
+        
+        .about-content { flex: 1; max-width: 600px; }
+        .abou
+        }
+
+        
+        .skills-section {
+            background-color: var(--primary-bg);
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-top: 2rem;
         }
 
         .skills-column {
-            width: 45%; 
-            padding: 15px;
-            background-color: #f3e5f5; 
-            border-radius: 15px;
-            border: 1px solid #ce93d8;
-            transition: background-color 0.5s;
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--secondary-accent);
+            transition: all 0.4s ease-in-out; 
+        }
+
+        .skills-column:hover {
+            transform: scale(1.03); 
+            box-shadow: 0 0 30px rgba(247, 37, 133, 0.6); 
+            border-color: var(--accent-color); 
         }
 
         .skills-column h3 {
-            color: #7b1fa2;
-            text-align: center;
+            font-size: 1.8rem;
+            color: var(--accent-color);
             margin-top: 0;
-            margin-bottom: 15px;
-            font-weight: 700;
-            font-size: 1.4em;
-            transition: color 0.5s;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px dashed var(--secondary-accent);
+            padding-bottom: 0.5rem;
         }
 
         .skills-column ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .skills-column li {
-            background-color: #fff; 
-            margin-bottom: 10px;
-            padding: 10px 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            font-size: 1em;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            transition: background-color 0.5s, box-shadow 0.3s;
-        }
-        
-        .skills-column li:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
+            font-size: 1.1rem;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+            transition: color 0.3s ease;
         }
 
-        #modal-overlay {
-            position: fixed;
-            top: 0;
+        .skills-column li:before {
+            content: '•'; 
+            position: absolute;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: none; /* Hidden by default */
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            cursor: pointer; /* Indicates it can be closed */
-        }
-        
-        /* NOTE: The default .gallery and .gallery-item rules below apply to the videos and achievements sections,
-           but the new looping gallery below has its own, more specific styles that override these for the #photos section.
-        */
-        .gallery-item img {
-            cursor: zoom-in; /* Indicate that the image can be clicked to zoom */
-            transition: transform 0.3s, box-shadow 0.3s, border-color 0.5s; /* Add transform transition */
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            line-height: 1.2;
         }
 
-        .gallery-item img.zoomed {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: auto;
-            max-width: 90vw;
-            max-height: 90vh;
-            height: auto;
-            border-radius: 15px;
-            object-fit: contain;
-            z-index: 1001; /* Above the overlay */
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-            cursor: zoom-out; /* Indicate it can be un-zoomed */
-        }
-        
-        /* --- Looping Gallery Animation Styles (NEW) --- */
-        .gallery-container {
-            overflow: hidden; /* Hide content outside the container */
-            margin: 20px 0;
-            padding: 10px 0;
-            background-color: #f3e5f5;
-            border-radius: 15px;
-            border: 2px solid #ce93d8;
+        .skills-column li:hover {
+            color: var(--text-color);
         }
 
-        .gallery-wrap {
-            display: flex;
-            width: fit-content; /* Allow the wrap to hold all items and duplicates */
-            animation: scroll-left 30s linear infinite; /* Apply the animation */
-        }
         
-        .gallery-item-loop {
-            width: 300px; /* Fixed width for each item in the loop */
-            flex-shrink: 0; /* Prevents items from shrinking */
-            margin: 0 10px; 
-            text-align: center;
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.5s;
+        .portfolio-section { background-color: var(--secondary-bg); }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem; margin-top: 2rem;
+        }
+        .project-card {
+            background-color: var(--primary-bg); border-radius: 12px; overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--secondary-accent);
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(247, 37, 133, 0.4);
+        }
+        .project-card img {
+            width: 100%; height: 200px; object-fit: cover; border-bottom: 2px solid var(--accent-color);
+        }
+        .project-info { padding: 1.5rem; }
+        .project-info h3 { font-size: 1.5rem; color: var(--accent-color); margin-top: 0; margin-bottom: 0.5rem; }
+        .project-info p { color: var(--light-text); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+        .tag {
+            background-color: var(--secondary-accent); color: var(--text-color); padding: 0.3rem 0.7rem;
+            border-radius: 5px; font-size: 0.8rem; font-weight: 500;
+        }
+        .project-links a {
+            color: var(--accent-color); text-decoration: none; font-weight: 600; margin-right: 1rem;
+            transition: color 0.3s ease;
+        }
+        .project-links a:hover { color: var(--text-color); }
+
+       
+        .achievements-section { background-color: var(--primary-bg); }
+        .achievement-item {
+            display: flex; align-items: flex-start; margin-bottom: 2rem; padding: 1.5rem;
+            border-radius: 10px; background-color: var(--secondary-bg); transition: background-color 0.3s ease;
+            border-left: 5px solid var(--accent-color);
+        }
+        .achievement-item i {
+            font-size: 2rem; color: var(--secondary-accent); margin-right: 1.5rem; padding-top: 5px;
+        }
+        .achievement-content h3 { margin-top: 0; font-size: 1.4rem; color: var(--text-color); }
+        .achievement-content p { color: var(--light-text); font-size: 1rem; margin-bottom: 0; }
+        
+        
+        @media (max-width: 1200px) {
+            .hero-section {
+                flex-direction: column; text-align: center; gap: 3rem; height: auto; min-height: 100vh;
+            }
+            .about-section {
+                padding: 60px 2rem;
+            }
+            .about-main-flex {
+                flex-direction: column; 
+                align-items: center;
+            }
+            .about-content {
+                max-width: 100%;
+                text-align: center;
+            }
+            .gallery-container {
+                min-width: 100%;
+                height: 350px; /* Adjust height for smaller screens */
+            }
+            .gallery-wrap {
+                justify-content: flex-start; /* Keep items left-aligned for scroll */
+            }
+            .skills-grid {
+                grid-template-columns: 1fr; 
+                text-align: left; 
+            }
+            .skills-column {
+                text-align: left; 
+            }
+            .social-icons {
+                justify-content: center;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .hero-image {
+                width: 300px; height: 300px;
+            }
+            .section-padding {
+                padding: 60px 2rem;
+            }
         }
 
-        .gallery-item-loop img {
-            width: 280px; 
-            height: 180px;
-            border-radius: 10px;
-            border: 3px solid #ba68c8;
-            object-fit: cover;
-            transition: border-color 0.5s;
-            cursor: zoom-in;
-        }
-
-        .gallery-item-loop p {
-            font-size: 0.9em;
-            margin-top: 10px;
-            color: #6a1b9a;
-            text-align: center;
-            transition: color 0.5s;
-        }
-        
-        /* Stop the animation on hover for better viewing */
-        .gallery-container:hover .gallery-wrap {
-            animation-play-state: paused;
-        }
-
-        /* The core looping animation: moves the content left by 50% (the width of one full set of images) */
-        @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } 
-        }
-
-        /* --- Dark Mode Styles (Updated for Loop and Profile Pic) --- */
-        body.dark-mode {
-            background-color: #121212;
-            color: #e0f7fa;
-        }
-        
-        body.dark-mode header {
-            background-color: #004d40;
-        }
-        
-        /* Dark Mode Profile Pic Style */
-        body.dark-mode .profile-pic-container {
-            border: 5px solid #00897b; /* Teal border for dark mode */
-            box-shadow: 0 0 15px rgba(0, 137, 123, 0.8), 0 0 5px rgba(0, 0, 0, 0.3);
-        }
-        /* */
-        
-        body.dark-mode .header-nav a {
-            background-color: #00897b;
-            box-shadow: 0 3px #004d40;
-        }
-        
-        body.dark-mode .header-nav a:hover {
-            background-color: #00695c;
-            box-shadow: 0 2px #004d40;
-        }
-        
-        body.dark-mode .header-nav a:active {
-            box-shadow: 0 0 #004d40;
-        }
-        
-        body.dark-mode h2 {
-            color: #80cbc4;
-            border-bottom: 3px dashed #00897b;
-        }
-
-        body.dark-mode section {
-            background-color: #1e1e1e;
-            border: 2px solid #004d40;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-        }
-        
-    
-        body.dark-mode .skills-column {
-            background-color: #2c2c2c;
-            border: 1px solid #00897b;
-        }
-        
-        body.dark-mode .skills-column h3 {
-            color: #80cbc4;
-        }
-
-        body.dark-mode .skills-column li {
-            background-color: #383838;
-            color: #e0f7fa;
-        }
-    
-    
-        body.dark-mode .gallery-container {
-            background-color: #2c2c2c;
-            border: 2px solid #00897b;
-        }
-        
-        body.dark-mode .gallery-item-loop {
-            background-color: #1e1e1e;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-        
-        body.dark-mode .gallery-item-loop img {
-            border: 3px solid #00897b;
-        }
-        
-        body.dark-mode .gallery-item-loop p {
-            color: #e0f7fa;
-        }
-
-    
-        body.dark-mode .gallery-item {
-            background-color: #2c2c2c;
-        }
-        
-        body.dark-mode .gallery-item img, 
-        body.dark-mode .gallery-item iframe {
-            border: 3px solid #00897b;
-        }
-        
-        body.dark-mode .gallery-item p {
-            color: #e0f7fa;
-        }
-        
-        body.dark-mode .outputs a {
-            color: #ffab40;
-        }
-        
-        body.dark-mode .contact-form {
-            background-color: #2c2c2c;
-            border: 5px solid #004d40;
-        }
-
-        body.dark-mode .contact-form label {
-            color: #80cbc4;
-        }
-
-        body.dark-mode .contact-form input[type="text"],
-        body.dark-mode .contact-form input[type="email"],
-        body.dark-mode .contact-form textarea {
-            background-color: #121212;
-            color: #e0f7fa;
-            border: 2px solid #004d40;
-        }
-        
-        body.dark-mode footer {
-            background-color: #004d40;
-        }
-        
-        
-        #mode-toggle {
-            background-color: #7b1fa2;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 1em;
-            margin: 10px auto;
-            display: block;
-            transition: background-color 0.3s, transform 0.1s;
-        }
-        
-        body.dark-mode #mode-toggle {
-            background-color: #00897b;
-        }
-
-        body.dark-mode #mode-toggle:hover {
-            background-color: #00695c;
-        }
-
-        #mode-toggle:hover {
-            background-color: #993399;
-        }
-
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column; padding: 1.5rem;
+            }
+            .nav-links {
+                margin-top: 1rem; gap: 1.5rem;
+            }
+            .hero-section, .section-padding {
+                padding: 1rem;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-image {
+                width: 250px; height: 250px;
+            }
+            .about-content h2, .section-title {
+                font-size: 2rem;
+            }
+            .portfolio-grid { gap: 2rem; }
+            .modal-content {
+                width: 95%;
+            }
+            .gallery-container {
+                padding: 1rem;
+            }
+            .gallery-item-loop {
+                min-width: 200px;
+                max-width: 200px;
+            }
+            
         .gallery {
             display: flex;
             justify-content: space-around;
@@ -444,37 +373,31 @@
             text-align: center;
             transition: color 0.5s;
         }
+        }
 
-        .outputs ul {
-            list-style: '⭐ ';
-            padding-left: 25px;
+        @media (max-width: 480px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            .nav-links {
+                flex-wrap: wrap; justify-content: center;
+            }
+            .project-card {
+                min-width: 100%;
+            }
+            .skills-column {
+                padding: 1.5rem;
+            }
         }
         
-        .outputs li {
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-
-        .outputs a {
-            color: #e91e63;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.5s;
-        }
-
-        .outputs a:hover {
-            color: #ff80ab;
-            text-decoration: underline;
-        }
-
         .contact-form {
             max-width: 600px;
             margin: 20px auto;
             padding: 30px;
-            border: 5px solid #ce93d8;
+            border: 5px solid #46007B;
             border-radius: 25px;
             text-align: left; 
-            background-color: #f3e5f5;
+            background-color: #2B003F;
             transition: background-color 0.5s, border-color 0.5s;
         }
 
@@ -483,7 +406,7 @@
             width: 100%;
             margin-bottom: 5px;
             font-weight: 600;
-            color: #7b1fa2;
+            color: #E9B5FF;
             transition: color 0.5s;
         }
         
@@ -494,9 +417,9 @@
             width: 95%;
             margin-bottom: 20px;
             padding: 12px;
-            border: 2px solid #ce93d8;
+            border: 2px solid #FF00A6;
             border-radius: 10px;
-            background-color: white;
+            background-color: #4E008Ewhite;
             transition: border-color 0.3s, background-color 0.5s, color 0.5s;
         }
 
@@ -508,7 +431,7 @@
         }
 
         .contact-form button {
-            background-color: #ff80ab;
+            background-color: #6F3FAD;
             color: white;
             padding: 12px 25px;
             border: none;
@@ -517,7 +440,7 @@
             font-size: 1.1em;
             margin-top: 10px;
             transition: background-color 0.3s, transform 0.1s;
-            box-shadow: 0 4px #e91e63;
+            box-shadow: 0 4px #B853EC;
             font-weight: 600;
         }
 
@@ -529,159 +452,136 @@
             transform: translateY(4px);
             box-shadow: 0 0 #e91e63;
         }
-        
-        footer {
-            background-color: #4a148c;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-            font-weight: 300;
-            transition: background-color 0.5s;
-        }
     </style>
 </head>
-<body>
-    
-    <div id="modal-overlay"></div>
+           <body>
+    <nav class="navbar">
+        <a href="#home" class="navbar-brand">Portfolio</a>
+        <div class="nav-links">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#portfolio">Links</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#code-examples">Outputs</a> <a href="#tutorials">Tutorials</a> <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-    <header>
-        <h1>My Portfolio</h1>
+
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <p> </p>
+            <h1>Sheilla Marie T. Lanojan</h1>
+              <p> </p>
+          <center> <div class="hero-image">
+            <img src="1763417412006~2.jpg" alt="Sheilla"> 
+        </div>
+        <p> </p></center> 
+            <div class="social-icons">
+                <a href="https://www.instagram.com/shei_luvx?igsh=ZjA0YjN6N2lubGt5" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/sheiluvMe" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.tiktok.com/@shei_luv3?_r=1&_t=ZS-91dGEOigigy" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.youtube.com/@SheillaMarie-g6j" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+            <a href="#about" class="btn-primary">More About Me</a>
+        </div>
         
-        <div class="profile-pic-container">
-            <img src="Screenshot_20251030_083340_Files by Google.png" alt="Sheilla Marie Lañojan Profile Picture">
+    </section>
+    
+    <section class="about-section section-padding" id="about">
+        
+        <div class="about-main-flex">
+            <div class="about-content">
+                <h2 class="section-title">About Me</h2>
+                <p>I am a passionate computer science student specializing in front-end development, focusing on creating clean, efficient, and user-friendly interfaces..</p>
+                
+            </div>
+            
+         
+        </div>
+    </section>
+
+    <section class="skills-section section-padding" id="skills">
+        <h2 class="section-title" style="align-self: flex-start; margin-bottom: 3rem;"> </h2>
+        
+        <div class="skills-grid">
+            
+            <div class="skills-column">
+                <h3>Hobbies & Interests</h3>
+                <ul>
+                    <li><i class="fas fa-pencil-ruler" style="color: var(--accent-color);"></i> Drawing</li>
+                    <li><i class="fas fa-music" style="color: var(--accent-color);"></i> Dancing</li>
+                    <li><i class="fas fa-gamepad" style="color: var(--accent-color);"></i> Playing Online Games</li>
+                    <li><i class="fas fa-utensils" style="color: var(--accent-color);"></i> Eating</li>
+                </ul>
+            </div>
+            
+            <div class="skills-column">
+                <h3>Creative Skills</h3>
+                <ul>
+                    <li><i class="fab fa-figma" style="color: var(--accent-color);"></i> Figma Design</li>
+                    <li><i class="fas fa-image" style="color: var(--accent-color);"></i> Canva Design</li>
+                    <li><i class="fas fa-video" style="color: var(--accent-color);"></i> Capcut Editing</li>
+                </ul>
+            </div>
             
         </div>
-        <h2>Sheilla Marie Lañojan</h2>
-        <p>Bachelor of Science in Information Technology</p>
-        
-        <nav class="header-nav">
-            <a href="#about">About Me 👋</a>
-            <a href="#photos">Photos 📸</a>
-            <a href="#videos">Videos 🎥</a>
-            <a href="#skills">Skills 🧠🎨</a>
-            <a href="#achievements">Achievements 🏅</a>
-            <a href="#contact">Contact Me 💌</a>
-        </nav>
-        </header>
+    </section>
 
-    <main>
-        <button id="mode-toggle">Switch to Dark Mode 🌙</button>
+    <section class="portfolio-section section-padding" id="portfolio">
+        <h2 class="section-title">My Outputs</h2>
 
-        <section id="about">
-            <h2>Hello, I'm Sheilla Marie! </h2>
-            <p>
-              I am Sheilla Marie Lañojan, a **BSIT student** at Central Philippine State University. For fun, I enjoy **Drawing**, **Dancing**, and **Playing online games**! I also often use **Capcut** for video editing.
-            </p>
-        </section>
+        <div class="portfolio-grid">
+            <div class="project-card">
+                <img src="Screenshot_20251123_121717_WebCode.png" alt="Canva Portfolio"> 
+                <div class="project-info">
+                    <h3>Canva Portfolio</h3>
+                    <div class="project-tags">
+                    </div>
+                    <div class="project-links">
+                        <a href="https://www.canva.com/design/DAGxQ-OLtNo/_O8d-X4iZ_AMIC7DgoWOMg/edit?utm_content=DAGxQ-OLtNo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank"><i class="fas fa-link"></i> Click here !</a>
+                    </div>
+                </div>
+            </div>
 
-        <section id="photos">
-            <h2>My Favorite Photos📸</h2>
             
-            <div class="gallery-container">
-                <div class="gallery-wrap">
-                    
-                    <div class="gallery-item-loop">
-                        <img src="IMG20250929142316 (1).jpg" alt="A lovely swimming spot" onclick="zoomImage(this)">
-                        <p>This is me when we go in division near Poblacion Highschool</p>
+            <div class="project-card">
+                 <img src="Screenshot_20251123_122353_WebCode.png" alt="me"> 
+                <div class="project-info">
+                    <h3>Figma Portfolio</h3>
+                    <div class="project-tags">
                     </div>
-                    
-                    <div class="gallery-item-loop">
-                        <img src="received_1677601796241809 (1).jpeg" alt="Me in Baji Baji" onclick="zoomImage(this)">
-                        <p>This me when we went to The new lane in Bungyod</p>
+                    <div class="project-links">
+                        <a href="https://www.figma.com/proto/DUxN42QVhSXNdQWt8EAoOn/FIGMA-PORTFOLIO?node-id=0-1&t=SHRKe2h5PlyBr3ZE-1" target="_blank"><i class="fas fa-link"></i> Click here !</a>
                     </div>
-                    
-                    <div class="gallery-item-loop">
-                        <img src="received_1102198738570024 (1).jpeg" alt="A self-portrait" onclick="zoomImage(this)">
-                        <p>This is also taken in new lanes in bungyod</p>
-                    </div>
-                    
-                    <div class="gallery-item-loop">
-                        <img src="Messenger_creation_DE3769C4-299D-4F55-A15F-C63BB44C3979~2.jpeg" alt="A lovely swimming spot" onclick="zoomImage(this)">
-                        <p>This is my favorite place to swim! (Click to zoom!)</p>
-                    </div>
-                    
-                    <div class="gallery-item-loop">
-                        <img src="20250415_143106~2.jpg" alt="Me in Baji Baji" onclick="zoomImage(this)">
-                        <p>This is me when we were in Baji Baji! (Click to zoom!)</p>
-                    </div>
-                    
-                    <div class="gallery-item-loop">
-                        <img src="Messenger_creation_DE3769C4-299D-4F55-A15F-C63BB44C3979~2.jpeg" alt="A self-portrait" onclick="zoomImage(this)">
-                        <p>This is Me! (Click to zoom!)</p>
-                    </div>
-                    
                 </div>
             </div>
-            </section>
 
-           <section id="videos">
-            <h2>Video Tutorials</h2>
-            <div class="youtube">
-                
-                <div class="youtube-item">
-                    <iframe src="https://youtube.com/embed/zXHtFlzG"></iframe>
+            
+            <div class="project-card">
+                <img src="/Screenshot_20251123_123253_WebCode.png">
+                <div class="project-info">
+                    <h3>E-commerce Website</h3>
+                    <div class="project-tags">
+                    </div>
+                    <div class="project-links">
+                        <a href="https://www.figma.com/proto/qyqb1NZNjmgEUMDaSwPEYp/LANOJAN--e-commerce-?node-id=0-1&t=qdmd7lYEYc5gT1vH-1" target="_blank"><i class="fas fa-link"></i>Click here !</a>
+                    </div>
                 </div>
-                
-                <div class="youtube-item">
-                    <iframe src="https://youtube.com/embed/-gWzSSEDj"></iframe>
-                </div>
-                
-                <div class="youtube-item">
-                    <iframe src="https://youtube.com/embed/-WYiFlWr3sN"></iframe>
-                </div>
-
             </div>
-        </section>
+        </div>
+    </section>
+    
+    
+    <section id="achievements" class="achievements-section section-padding">
+        <center>   <h2 class="section-title">My Experience 🏆!</h2> 
+            <p style="color: var(--light-text); max-width: 800px; line-height: 1.6;">
+                "I actively participated in our school's **Mobile Legends esports event**, where my team demonstrated strong
+                coordination and strategic gameplay. We got **Champion twice**. After several intense matches, we
+                emerged as champions, making it one of the most memorable achievements of my school life."
+            </p> </center>
         
-        
-
-        <section id="skills">
-            <h2>Hobbies &  Skills 🧠🎨</h2>
-            <div class="skills-grid">
-                
-                <div class="skills-column">
-                    <h3>Hobbies & Interests 💖</h3>
-                    <ul>
-                        <li>Drawing ✏️</li>
-                        <li>Dancing 💃</li>
-                        <li>Playing Online Games 🎮</li>
-                        <li>Eating</li>
-                    </ul>
-                </div>
-                
-                <div class="skills-column">
-                    <h3> Skills 💻</h3>
-                    <ul>
-                        <li>Figma Design 🎨</li>
-                        <li>Canva Design 🖌️</li>
-                        <li>Capcut Editing</li>
-                    </ul>
-                </div>
-                
-            </div>
-        </section>
-        
-        
-        <section class="outputs">
-            <h2>My Digital Creations ✨</h2>
-            <ul>
-                <li>Portfolio in Canva: <a href="https://www.canva.com/design/DAGxQ-OLtNo/_O8d-X4iZ_AMIC7DgoWOMg/edit?utm_content=DAGxQ-OLtNo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">CLICK HERE to see my Canva portfolio</a></li>
-                <li>Portfolio in Figma: <a href="https://www.figma.com/proto/DUxN42QVhSXNdQWt8EAoOn/FIGMA-PORTFOLIO?node-id=0-1&t=SHRKe2h5PlyBr3ZE-1" target="_blank">CLICK HERE to see my Figma portfolio</a></li>
-                <li>Figma E-Commerce Prototype: <a href="https://www.figma.com/proto/WfZlzdzetxQP0WsN78BS3M/Lanojan--Sheilla-Marie-T.?node-id=0-1&t=l8PRIjqbVR8UHVEQ-1" target="_blank">CLICK HERE to see my E-Commerce design</a></li>
-            </ul>
-        </section>
-           <section id="achievements">
-            <h2>My Achievements & Experience 🏆</h2>
-            <p>
-                "I actively participated in our school's Mobile Legends
-esports event , where my team demonstrated strong
-coordination and strategic gameplay. We got
-Champion twice . After several intense matches, we
-emerged as champions, making it one of the most
-memorable achievements of my school life."
-            </p>
-            <div class="gallery">
+        <div class="gallery" style="margin-top: 3rem;">
                 
                 <div class="gallery-item">
                     <img src="received_1046205251015479_image_repair_1754218601419.jpg" alt="Certificate of Participation" onclick="zoomImage(this)">
@@ -690,12 +590,12 @@ memorable achievements of my school life."
                 
                 <div class="gallery-item">
                     <img src="received_4045798345750174.jpeg" alt="Group Photo" onclick="zoomImage(this)">
-                    <p>This is the second award that I achieve .</p>
+                    <p>This is the second award that I achieve.</p>
                 </div>
                 
                 <div class="gallery-item">
                     <img src="20250801_170402.jpg" alt="Award or Recognition" onclick="zoomImage(this)">
-                    <p>This Is the First award that we achieve by being a champion in MLBB </p>
+                    <p>This Is the First award that we achieve by being a champion in MLBB.</p>
                 </div>
                 
                 <div class="gallery-item">
@@ -703,10 +603,78 @@ memorable achievements of my school life."
                     <p>This is the first win in participating in MLBB in our school during in my First Year.</p>
                 </div>
 
+        </div>
+    </section>     
+    
+     <section id="code-examples" class="section-padding" style="background-color: var(--primary-bg); text-align: center;">
+        <h2 class="section-title" style="margin-bottom: 3rem; display: inline-block;">Outputs</h2>
+        <p style="color: var(--light-text); max-width: 800px; line-height: 1.6; margin: 0 auto 3rem;">
+            A small showcase of my Outputs in various activities that we make.
+        </p>
+        
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+            
+            <div style="width: 30%; min-width: 250px; background-color: var(--secondary-bg); padding: 15px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);">
+                <img src="/Messenger_creation_20E01C05-5B75-421C-8E97-4881E8D5E474.jpeg" alt="HTML Structure Example" style="width: 100%; height: 200px; border-radius: 10px; border: 3px solid var(--accent-color); object-fit: cover;">
             </div>
-        </section>     
-        <section id="contact">
-            <h2>Send Me a Sweet Message! 💌</h2>
+            
+            <div style="width: 30%; min-width: 250px; background-color: var(--secondary-bg); padding: 15px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);">
+                <img src="/Messenger_creation_F93804BF-EEC9-43B1-AA9E-64AD46ADD184.jpeg" alt="CSS Flexbox Example" style="width: 100%; height: 200px; border-radius: 10px; border: 3px solid var(--accent-color); object-fit: cover;">
+            </div>
+            
+            <div style="width: 30%; min-width: 250px; background-color: var(--secondary-bg); padding: 15px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);">
+                <img src="/Messenger_creation_36483917-0646-44C8-BDFE-22BEF1562D33.jpeg" alt="JavaScript Function Example" style="width: 100%; height: 200px; border-radius: 10px; border: 3px solid var(--accent-color); object-fit: cover;">
+            </div>
+        </div>
+    </section>
+    
+    <center> 
+ <section class="tutorials-section section-padding" id="tutorials">
+    <h2 class="section-title">Video Tutorials 🎥</h2>
+    <div class="video-grid">
+        
+        <div class="video-card">
+                       <div class="video-info">
+                <h3>Basic CapCut Editing</h3>
+            </div>
+            <iframe 
+                src="https://www.youtube.com/embed/j5_471mO14c" 
+                title="Basic CapCut Editing" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="video-card">
+                        <div class="video-info">
+                <h3>Figma Components Deep Dive</h3>
+            </div>
+            <iframe 
+                src="https://www.youtube.com/embed/Q2IupOJHrzM" 
+                title="Figma Components Deep Dive" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="video-card">
+                       <div class="video-info">
+                <h3>Canva Mockup Creation</h3>
+            </div>
+            <iframe 
+                src="https://www.youtube.com/embed/H1d4RKv24BA" 
+                title="Canva Mockup Creation"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+       </center> 
+    </div>
+</section>
+<p> </p>
+    <p> </p>
+     <section id="contact">
+          <center>   <h2>Send Me a Sweet Message! 💌</h2></center> 
             <form action="/submit-form" method="post" class="contact-form">
                 <label for="firstname">First Name:</label>
                 <input type="text" id="firstname" name="firstname" required>
@@ -723,61 +691,21 @@ memorable achievements of my school life."
                 <button type="submit">Send It! 💖</button>
             </form>  
         </section>
-         <center>
-        <h1>Contact Me</h1>
 
-    <div class="contact-links">
-       
-        <a href="https://www.instagram.com/shei_luvx?igsh=ZjA0YjN6N2lubGt5" target="_blank">Instagram</a>
-
-        <a href="https://www.facebook.com/sheiluvMe" target="_blank">Facebook</a>
-
-        <a href="sheillamarie2006@gmail.com">Email</a>
-        </center>
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
     </div>
-        
-    </main>
- 
-    <footer> <center>
-        <p>&copy; 2025 Sheilla's Portfolio.</p>
-   </center>  </footer>
- 
-    <script>
-    
-    
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggleButton = document.getElementById('mode-toggle');
-            const body = document.body;
-            
-            
-            function setDarkMode(isDark) {
-                if (isDark) {
-                    body.classList.add('dark-mode');
-                    toggleButton.textContent = 'Switch to Light Mode ☀️';
-                    localStorage.setItem('darkMode', 'enabled');
-                } else {
-                    body.classList.remove('dark-mode');
-                    toggleButton.textContent = 'Switch to Dark Mode 🌙';
-                    localStorage.setItem('darkMode', 'disabled');
-                }
-            }
 
-            
-            const savedMode = localStorage.getItem('darkMode');
-            if (savedMode === 'enabled') {
-                setDarkMode(true);
-            } else {
-                setDarkMode(false);
-            }
+    <script><div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
 
-            
-            toggleButton.addEventListener('click', () => {
-                const isDark = body.classList.contains('dark-mode');
-                setDarkMode(!isDark);
-            });
-        });
-
-        
-    </script>
 </body>
 </html>
+
+</body>
+    </html>
